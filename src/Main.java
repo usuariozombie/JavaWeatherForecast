@@ -41,7 +41,7 @@ public class Main {
             //Creamos la URL con la API y el String de la ciudad
             //quitar el espacio en blanco de la ciudad
             location = location.replaceAll(" ", "+");
-            URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=+" + location + "+&appid=894fa1da528feac8576e3477fc73071a&units=metric");
+            URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=+" + location + "+&appid={YOURAPIKEYHERE}&units=metric");
             //Creamos la conexión
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
