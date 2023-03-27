@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Scanner;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -38,10 +39,12 @@ public class Main {
             //Pedimos los datos de la ciudad con scanner y los guardamos en un String
             System.out.print(orange + "Introduce el nombre de una ciudad: " + reset);
             String location = sc.nextLine();
+            //saltamos una línea porque si no cierra el programa
+            System.out.println();
             //Creamos la URL con la API y el String de la ciudad
             //quitar el espacio en blanco de la ciudad
-            location = location.replaceAll(" ", "+");
-            URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=+" + location + "+&appid={YOURAPIKEYHERE}&units=metric");
+            String encodedLocation = URLEncoder.encode(location, "UTF-8");
+            URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=+" + encodedLocation + "+&appid=894fa1da528feac8576e3477fc73071a&units=metric");
             //Creamos la conexión
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
@@ -80,7 +83,7 @@ public class Main {
             }
 
             System.out.print(green + "\n¿Quieres consultar otra ciudad? (S/N): " + reset);
-            answer = sc.next();
+            answer = sc.nextLine();
             //clean the console
             System.out.print("\033[H\033[2J");
         }while (answer.equals("S") || answer.equals("s") || answer.equals("Si") || answer.equals("si"));
